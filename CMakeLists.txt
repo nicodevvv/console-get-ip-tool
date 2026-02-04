@@ -4,9 +4,9 @@ project(get-ip-tool C)
 set(CMAKE_C_STANDARD 11)
 
 # Find curl library
-find_package(CURL REQUIRED)
+find_package(CURL REQUIRED CONFIG)
 
 add_executable(get-ip-tool get-ip-tool.c)
 
 # Link curl library
-target_link_libraries(get-ip-tool CURL::libcurl)
+target_link_libraries(get-ip-tool PRIVATE CURL::libcurl)

@@ -53,7 +53,8 @@ jobs:
         run: |
           git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
           C:\vcpkg\bootstrap-vcpkg.bat
-          C:\vcpkg\vcpkg install curl:x64-windows --triplet x64-windows
+          C:\vcpkg\vcpkg install curl:x64-windows
+          dir C:\vcpkg\installed\x64-windows
         shell: cmd
 
       - name: Build (Unix)
@@ -69,7 +70,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake .. -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
           cmake --build . --config Release
         shell: cmd
 

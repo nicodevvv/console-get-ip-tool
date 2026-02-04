@@ -51,11 +51,9 @@ jobs:
       - name: Setup vcpkg (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          git clone https://github.com/Microsoft/vcpkg.git
-          cd vcpkg
-          bootstrap-vcpkg.bat
-          vcpkg install curl:x64-windows
-          vcpkg integrate install
+          git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
+          C:\vcpkg\bootstrap-vcpkg.bat
+          C:\vcpkg\vcpkg install curl:x64-windows --triplet x64-windows
         shell: cmd
 
       - name: Build (Unix)
@@ -71,7 +69,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake .. -DCMAKE_TOOLCHAIN_FILE="%GITHUB_WORKSPACE%\vcpkg\scripts\buildsystems\vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=x64-windows
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows
           cmake --build . --config Release
         shell: cmd
 

@@ -54,6 +54,7 @@ jobs:
           git clone https://github.com/Microsoft/vcpkg.git
           .\vcpkg\bootstrap-vcpkg.bat
           .\vcpkg\vcpkg install curl:x64-windows
+        shell: cmd
 
       - name: Build (Unix)
         if: matrix.os != 'windows-latest'
@@ -68,8 +69,9 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake .. -DCMAKE_TOOLCHAIN_FILE=..\vcpkg\scripts\buildsystems\vcpkg.cmake
+          cmake .. -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake"
           cmake --build . --config Release
+        shell: cmd
 
       - name: Prepare artifact (Unix)
         if: matrix.os != 'windows-latest'

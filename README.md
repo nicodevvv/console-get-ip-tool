@@ -10,6 +10,94 @@ A lightweight command-line tool written in C that retrieves geographical and net
 - Fast and lightweight (written in C)
 - Uses libcurl for HTTP requests
 
+## Quick Install
+
+### Option 1: Download Pre-compiled Binary (Easiest)
+
+Download the latest release for your platform from [Releases](https://github.com/nicodevvv/console-get-ip-tool/releases):
+
+- **Linux (x64)**: `get-ip-tool-linux-x64.tar.gz`
+- **macOS (Intel)**: `get-ip-tool-macos-x64.tar.gz`
+- **macOS (Apple Silicon)**: `get-ip-tool-macos-arm64.tar.gz`
+- **Windows (x64)**: `get-ip-tool-windows-x64.zip`
+
+**Installation after download:**
+
+**macOS/Linux:**
+```bash
+# Extract
+tar -xzf get-ip-tool-*.tar.gz
+
+# Move to system path
+sudo mv get-ip-tool /usr/local/bin/
+sudo chmod +x /usr/local/bin/get-ip-tool
+```
+
+**Windows:**
+```powershell
+# Extract the zip file, then run as Administrator:
+Move-Item get-ip-tool.exe "$env:ProgramFiles\get-ip-tool\"
+# Add to PATH manually via System Environment Variables
+```
+
+### Option 2: Automatic Installer Script
+
+### macOS / Linux
+
+Install with a single command:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/nicodevvv/console-get-ip-tool/main/install.sh | bash
+```
+
+The installer will:
+- Detect your operating system
+- Install required dependencies (CMake, libcurl)
+- Clone and build the project
+- Install the binary to `/usr/local/bin`
+- Clean up temporary files
+
+### Windows
+
+**Prerequisites:**
+- [Git](https://git-scm.com/download/win)
+- [CMake](https://cmake.org/download/)
+- A C compiler: [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/) or [MinGW-w64](https://www.mingw-w64.org/)
+- [vcpkg](https://vcpkg.io/en/getting-started.html) for libcurl
+
+**Installation:**
+
+1. Install curl library via vcpkg:
+```powershell
+vcpkg install curl:x64-windows
+```
+
+2. Run the installer as Administrator:
+```powershell
+# Download and run
+irm https://raw.githubusercontent.com/nicodevvv/console-get-ip-tool/main/install.ps1 | iex
+
+# Or download first, then run
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/nicodevvv/console-get-ip-tool/main/install.ps1" -OutFile "install.ps1"
+PowerShell -ExecutionPolicy Bypass -File install.ps1
+```
+
+The installer will automatically add the tool to your PATH.
+
+### Uninstall
+
+**macOS/Linux:**
+```bash
+sudo rm /usr/local/bin/get-ip-tool
+```
+
+**Windows:**
+```powershell
+# Run as Administrator
+Remove-Item "$env:ProgramFiles\get-ip-tool" -Recurse -Force
+# Manually remove from PATH in System Environment Variables
+```
+
 ## Prerequisites
 
 Before building this tool, ensure you have the following installed:
@@ -27,19 +115,22 @@ brew install cmake curl
 
 **Ubuntu/Debian:**
 ```bash
-sudo apt-get install cmake libcurl4-openssl-dev
+sudo apt-get install cmake libcurl4-openssl-dev build-essential
 ```
 
 **Fedora/RHEL:**
 ```bash
-sudo dnf install cmake libcurl-devel
+sudo dnf install cmake libcurl-devel gcc make
 ```
 
-## Building the Project
+**Windows:**
+- Install [CMake](https://cmake.org/download/)
+### macOS / Linux
 
 1. Clone or navigate to the project directory:
 ```bash
-cd ip-info-tool-console
+git clone https://github.com/nicodevvv/console-get-ip-tool.git
+cd console-get-ip-tool
 ```
 
 2. Create a build directory and navigate to it:
@@ -53,6 +144,34 @@ cd build
 cmake ..
 ```
 
+4. Build the executable:
+```bash
+cmake --build .
+```
+
+The executable `get-ip-tool` will be created in the build directory.
+
+### Windows
+
+1. Clone the repository:
+```powershell
+git clone https://github.com/nicodevvv/console-get-ip-tool.git
+cd console-get-ip-tool
+```
+
+2. Configure with CMake (using vcpkg toolchain):
+```powershell
+mkdir build
+cd build
+cmake .. -DCMAKE_TOOLCHAIN_FILE=[path-to-vcpkg]/scripts/buildsystems/vcpkg.cmake
+```
+
+3. Build:
+```powershell
+cmake --build . --config Release
+```
+
+The executable `get-ip-tool.exe` will be in the `Release` sub
 4. Build the executable:
 ```bash
 cmake --build .

@@ -17,7 +17,6 @@ A lightweight command-line tool written in C that retrieves geographical and net
 Download the latest release for your platform from [Releases](https://github.com/nicodevvv/console-get-ip-tool/releases):
 
 - **Linux (x64)**: `get-ip-tool-linux-x64.tar.gz`
-- **macOS (Intel)**: `get-ip-tool-macos-x64.tar.gz`
 - **macOS (Apple Silicon)**: `get-ip-tool-macos-arm64.tar.gz`
 - **Windows (x64)**: `get-ip-tool-windows-x64.zip`
 

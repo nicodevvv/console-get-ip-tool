@@ -23,21 +23,21 @@ jobs:
           git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
           cd C:\vcpkg
           call bootstrap-vcpkg.bat
-          vcpkg install curl:x64-windows --triplet x64-windows
+          vcpkg install curl:x64-windows-static --triplet x64-windows-static
           vcpkg list
         shell: cmd
 
       - name: Verify curl installation
         run: |
-          dir C:\vcpkg\installed\x64-windows\include
-          dir C:\vcpkg\installed\x64-windows\lib
+          dir C:\vcpkg\installed\x64-windows-static\include
+          dir C:\vcpkg\installed\x64-windows-static\lib
         shell: cmd
 
       - name: Build
         run: |
           mkdir build
           cd build
-          cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_BUILD_TYPE=Release
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static -DCMAKE_BUILD_TYPE=Release
           cmake --build . --config Release
         shell: cmd
 

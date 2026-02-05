@@ -68,7 +68,7 @@ The installer will:
 
 1. Install curl library via vcpkg:
 ```powershell
-vcpkg install curl:x64-windows
+vcpkg install curl:x64-windows-static
 ```
 
 2. Run the installer as Administrator:
@@ -162,7 +162,7 @@ cd console-get-ip-tool
 ```powershell
 mkdir build
 cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=[path-to-vcpkg]/scripts/buildsystems/vcpkg.cmake
+cmake .. -DCMAKE_TOOLCHAIN_FILE=[path-to-vcpkg]/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static
 ```
 
 3. Build:

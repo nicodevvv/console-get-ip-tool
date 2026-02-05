@@ -118,6 +118,11 @@ int main(int argc, char **argv)
 
     printf("└───────────┴───────────────────────────┘\n");
 
+#ifdef _WIN32
+    printf("\nPressione Enter para sair...");
+    getchar();
+#endif
+
     curl_easy_cleanup(curl);
     free(chunk.data);
     return 0;
